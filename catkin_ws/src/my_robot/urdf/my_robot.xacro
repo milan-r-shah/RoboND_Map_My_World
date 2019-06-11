@@ -81,7 +81,7 @@
       />
     </inertial>
 
-    <collision name='collision'>
+    <collision name='left_wheel_collision'>
       <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
       <geometry>
         <!-- <cylinder>
@@ -92,7 +92,7 @@
       </geometry>
     </collision>
 
-    <visual>
+    <visual name='left_wheel_visual'>
       <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
       <geometry>
         <!-- <cylinder>
@@ -127,14 +127,14 @@
       />
     </inertial>
 
-    <collision name='collision'>
+    <collision name='right_wheel_collision'>
       <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
       <geometry>
        <cylinder radius="0.1" length="0.05"/>
       </geometry>
     </collision>
 
-    <visual>
+    <visual name='right_wheel_visual'>
       <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
       <geometry>
        <cylinder radius="0.1" length="0.05"/>
@@ -165,14 +165,14 @@
         />
     </inertial>
 
-    <collision name='collision'>
+    <collision name='camera_collision'>
         <origin xyz = "0 0 0" rpy=" 0 0 0"/>
         <geometry>
             <box size = "0.05 0.05 0.05"/>
         </geometry>
     </collision>
 
-    <visual>
+    <visual name='camera_visual'>
         <origin xyz = "0 0 0" rpy=" 0 0 0"/>
         <geometry>
             <box size = "0.05 0.05 0.05"/>
@@ -181,9 +181,42 @@
    </link>
 
    <joint type="fixed" name="camera_joint">
-    <origin xyz="0.2 0 0" rpy="0 0 0"/>
-    <child link="camera"/>
-    <parent link="chassis"/>
-    <axis xyz="0 1 0"/>
+        <origin xyz="0.2 0 0" rpy="0 0 0"/>
+        <parent link="chassis"/>
+        <child link="camera"/>
+        <axis xyz="0 1 0"/>
    </joint>
+
+<!-- adding Hokuyo sensor -->
+    <link name = 'hokuyo'>
+        <inertial>
+            <mass value ="1e-5"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <inertia
+                ixx="1e-6" ixy="0" ixz="0"
+                iyy="1e-6" iyz="0"
+                izz="1e-6"
+            />
+        </inertial>
+
+        <collision name='hokuyo_collision'>
+            <origin xyz = "0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size = "0.1 0.1 0.1"/>
+            </geometry>
+        </collision>
+
+        <visual name='hokuyo_visual'>
+            <origin xyz = "0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://my_robot/meshes/hokuyo.dae"/>
+            </geometry>
+        </visual>
+    </link>
+	  <joint type="fixed" name="hokuyo_joint">
+        <origin xyz="0.15 0 0.1" rpy="0 0 0"/>
+        <parent link="chassis"/>
+        <child link="hokuyo"/>
+        <axis xyz = "0 1 0"/>
+    </joint>
 </robot>
