@@ -10,6 +10,7 @@
     <child link="chassis" />
   </joint>
 
+<!-- for main Chassis -->
   <link name='chassis'>
     <pose>0 0 0.1 0 0 0</pose>
 
@@ -36,7 +37,6 @@
         <box size=".4 .2 .1"/>
       </geometry>
     </visual>
-
 
     <collision name='back_caster_collision'>
       <origin xyz="-0.15 0 -0.05" rpy=" 0 0 0"/>
@@ -213,10 +213,31 @@
             </geometry>
         </visual>
     </link>
-	  <joint type="fixed" name="hokuyo_joint">
+    <joint type="fixed" name="hokuyo_joint">
         <origin xyz="0.15 0 0.1" rpy="0 0 0"/>
         <parent link="chassis"/>
         <child link="hokuyo"/>
         <axis xyz = "0 1 0"/>
     </joint>
+
+<!-- Changing the color of Left Wheel -->
+<gazebo reference="left_wheel">
+  <material>Gazebo/Black</material>
+</gazebo>
+
+<!-- Changing the color of Right Wheel -->
+<gazebo reference="right_wheel">
+  <material>Gazebo/Black</material>
+</gazebo>
+
+<!-- Changing the color of Chassis -->
+<gazebo reference="chassis">
+  <material>Gazebo/Red</material>
+</gazebo>
+
+<!-- Changing the color of Camera -->
+<gazebo reference="camera">
+  <material>Gazebo/Blue</material>
+</gazebo>
+
 </robot>
