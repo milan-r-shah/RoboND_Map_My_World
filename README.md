@@ -72,3 +72,5 @@ $ cd <directory_where_you_have_cloned_the_repo>/RoboND_Go_Chase_It/catkin_ws/
 $ source devel/setup.bash
 $ rosrun rqt_image_view rqt_image_view
 ```
+
+Now, put the white ball at different positions in front of the robot to see how robot moves to chase the white ball!
