@@ -19,7 +19,13 @@ void drive_robot(float lin_x, float ang_z)
 // This callback function continuously executes and reads the image data
 void process_image_callback(const sensor_msgs::Image img)
 {
+    ROS_INFO(" = = = = = = = = = = = = = = = = = = = = = = = = = =");
+    ROS_INFO_STREAM(img.height);
+    ROS_INFO_STREAM(img.width);
+    ROS_INFO_STREAM(img.step);
     int white_pixel = 255;
+    // ROS_INFO("white pixel value: %d", white_pixel);
+    ROS_INFO(" = = = = = = = = = = = = = = = = = = = = = = = = = =");
     int white_pixel_cnt = 0;
     int white_pixel_cnt_threshold = 0;
 
@@ -27,9 +33,9 @@ void process_image_callback(const sensor_msgs::Image img)
     // Then, identify if this pixel falls in the left, mid, or right side of the image
     // Depending on the white ball position, call the drive_bot function and pass velocities to it
     // Request a stop when there's no white ball seen by the camera
-    for(int i = 0; i < img.height*img.step; i++)
+    for(int i = 0; i < img.height*img.step; i = i + 3)
     {
-        if(img.data[i]==white_pixel)
+        if((img.data[i]==white_pixel) && (img.data[i+1]==white_pixel) && (img.data[i+2]==white_pixel))
         {
             white_pixel_cnt++;
         }
@@ -44,23 +50,23 @@ void process_image_callback(const sensor_msgs::Image img)
     {
         for(int h=0; h<img.height; h++)
         {
-            for(int s=0; s<0.3*img.step; s++)
+            for(int s=0; s<0.3*img.step; s = s + 3)
             {
-                if(img.data[s + img.step*h]==white_pixel)
+                if((img.data[s + img.step*h] == white_pixel) && (img.data[s + img.step*h + 1] == white_pixel) && (img.data[s + img.step*h+ 2] == white_pixel))
                 {
                     left_white_pixel_cnt++;
                 }
             }
-            for(int s=0.3*img.step; s < 0.7*img.step; s++)
+            for(int s=0.3*img.step; s < 0.7*img.step; s = s + 3)
             {
-                if(img.data[s + img.step*h]==white_pixel)
+                if((img.data[s + img.step*h] == white_pixel) && (img.data[s + img.step*h + 1] == white_pixel) &&(img.data[s + img.step*h+ 2] == white_pixel))
                 {
                     middle_white_pixel_cnt++;
                 }
             }
-            for(int s=0.7*img.step; s < img.step; s++)
+            for(int s=0.7*img.step; s < img.step; s = s + 3)
             {
-                if(img.data[s + img.step*h]==white_pixel)
+                if((img.data[s + img.step*h] == white_pixel) && (img.data[s + img.step*h + 1] == white_pixel) && (img.data[s + img.step*h+ 2] == white_pixel))
                 {
                     right_white_pixel_cnt++;
                 }
