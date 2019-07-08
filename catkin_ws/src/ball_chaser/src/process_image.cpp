@@ -32,36 +32,31 @@ void process_image_callback(const sensor_msgs::Image img)
     int right_white_pixel_cnt = 0;
 
     for(int h=0; h<img.height; h++)
-    {
-        // Dividing the image width or to be precise its 'step' into three parts by 30% left, next 40% into middle, & remaining 30% into right
-        
-        // Left part/side
-        for(int s=0; s<0.3*img.step; s = s + 3)
-        {
-            // In 'sensor_msgs/image', data is arranged in a 1D vector whereby one pixel is represented by three consecutive bytes (uint8) comprising
-            // the RED, BLUE, and GREEN color information.
-            // So, in each iteration, I'm checking three consecutive pixels/bytes
-            if((img.data[s + img.step*h] == white_pixel) && (img.data[s + img.step*h + 1] == white_pixel) && (img.data[s + img.step*h+ 2] == white_pixel))
-            {
-                left_white_pixel_cnt++;
-            }
-        }
-
-        // middle part
-        for(int s=0.3*img.step; s < 0.7*img.step; s = s + 3)
-        {
-            if((img.data[s + img.step*h] == white_pixel) && (img.data[s + img.step*h + 1] == white_pixel) &&(img.data[s + img.step*h+ 2] == white_pixel))
-            {
-                middle_white_pixel_cnt++;
-            }
-        }
-
-        // right part/side
-        for(int s=0.7*img.step; s < img.step; s = s + 3)
+    {     
+        // In 'sensor_msgs/image', data is arranged in a 1D vector whereby one pixel is represented by three consecutive bytes (uint8) comprising
+        // the RED, BLUE, and GREEN color information.
+        // So, in each iteration, I'm checking three consecutive pixels/bytes
+        for(int s=0; s<img.step; s = s + 3)
         {
             if((img.data[s + img.step*h] == white_pixel) && (img.data[s + img.step*h + 1] == white_pixel) && (img.data[s + img.step*h+ 2] == white_pixel))
             {
-                right_white_pixel_cnt++;
+                // Dividing the image width or to be precise its 'step' into three parts by 30% left, next 40% into middle, & remaining 30% into right
+                
+                // Left part of an image
+                if(s < 0.3*img.step)
+                {
+                    left_white_pixel_cnt++;
+                }
+                // Middle part of an image
+                else if(s >= 0.3*img.step && s < 0.7*img.step)
+                {
+                    middle_white_pixel_cnt++;
+                }
+                // Right part of an image
+                else
+                {
+                    right_white_pixel_cnt++;
+                }
             }
         }
     }
