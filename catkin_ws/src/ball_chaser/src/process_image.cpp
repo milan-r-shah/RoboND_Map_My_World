@@ -36,9 +36,9 @@ void process_image_callback(const sensor_msgs::Image img)
         // In 'sensor_msgs/image', data is arranged in a 1D vector whereby one pixel is represented by three consecutive bytes (uint8) comprising
         // the RED, BLUE, and GREEN color information.
         // So, in each iteration, I'm checking three consecutive pixels/bytes
-        for(int s=0; s<img.step; s = s + 3)
+        for(int s=0; s<img.step; s+=3)
         {
-            if((img.data[s + img.step*h] == white_pixel) && (img.data[s + img.step*h + 1] == white_pixel) && (img.data[s + img.step*h+ 2] == white_pixel))
+            if((img.data[img.step*h + s] == white_pixel) && (img.data[img.step*h + s + 1] == white_pixel) && (img.data[img.step*h+ s + 2] == white_pixel))
             {
                 // Dividing the image width or to be precise its 'step' into three parts by 30% left, next 40% into middle, & remaining 30% into right
                 
