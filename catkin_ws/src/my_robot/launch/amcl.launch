@@ -6,6 +6,8 @@
     <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
 
     <!-- AMCL Node -->
+    <node name="amcl" pkg="amcl" type="amcl" output="screen">
+    </node>
 
     <!-- Move Base Node -->
 
