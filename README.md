@@ -71,7 +71,7 @@ $ roslaunch my_robot world.launch
 ```
 
 #### 3. Launch amcl package
-This can be done by launching ```ball_chaser.launch``` file:
+This can be done by launching ```amcl.launch``` file:
 ```
 $ cd <directory_where_you_have_cloned_the_repo>/RoboND_Go_Chase_It/catkin_ws/
 $ source devel/setup.bash
