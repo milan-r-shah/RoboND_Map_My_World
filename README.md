@@ -5,47 +5,60 @@
 ## Project 02: Go Chase It!
 
 <p align="center">
-    <img src="./docs/GIFs/Milan_GoChaseIt.gif" width="600" height="338" title="Go Chase It!" >
+    <img src="./docs/Pics/amcl_localization.png" width="1200" height="360" title="Go Chase It!" >
 </p>
 
 ### Directory Structure
+
 ```
-.Go_Chase_It                            # Project 02: Go Chase It!
-├── ball_chaser                         # ball_chaser package
-│   ├── include
-│   │   └── ball_chaser
-│   ├── launch                          # launch folder for launch files
+.                                           # Project 03: Where Am I
+├── ball_chaser                             # ball_chaser package
+│   ├── launch
 │   │   └── ball_chaser.launch
-│   ├── src                             # source folder for C++ scripts
+│   ├── src
 │   │   ├── drive_bot.cpp
 │   │   └── process_image.cpp
-│   ├── srv                             # service folder for ROS Services
+│   ├── srv
 │   │   └── DriveToTarget.srv
-│   ├── CMakeLists.txt                  # compiler instructions
-│   └── package.xml                     # package info
-├── my_robot
-│   ├── launch                          # launch folder for launch files
+│   ├── CMakeLists.txt
+│   └── package.xml
+├── my_robot                                # my_robot package
+│   ├── config
+│   │   ├── base_local_planner_params.yaml  
+│   │   ├── costmap_common_params.yaml
+│   │   ├── global_costmap_params.yaml
+│   │   └── local_costmap_params.yaml
+│   ├── launch
+│   │   ├── amcl.launch
 │   │   ├── robot_description.launch
 │   │   └── world.launch
-│   ├── meshes                          # meshes folder for sensors
+│   ├── maps
+│   │   ├── MyWorld.pgm
+│   │   └── MyWorld.yaml
+│   ├── meshes
 │   │   └── hokuyo.dae
-│   ├── urdf                            # urdf folder for xacro files
+│   ├── urdf
 │   │   ├── my_robot.gazebo
 │   │   └── my_robot.xacro
-│   ├── worlds                          # world folder for world files
+│   ├── worlds
 │   │   ├── empty.world
 │   │   └── MyWorld.world
-│   ├── CMakeLists.txt                  # compiler instructions
-│   └── package.xml                     # package info
+│   ├── CMakeLists.txt
+│   └── package.xml
+├── teleop_twist_keyboard                   # teleop_twist_keyboard package
+│   ├── CHANGELOG.rst
+│   ├── CMakeLists.txt
+│   ├── package.xml
+│   ├── README.md
+│   └── teleop_twist_keyboard.py
 └── CMakeLists.txt -> /opt/ros/kinetic/share/catkin/cmake/toplevel.cmake
-
 ```
 
 ### How to run
 
 #### 1. First of all, clone this repo:
 ```
-git clone https://github.com/milan-r-shah/RoboND_Go_Chase_It.git
+git clone --recursive https://github.com/milan-r-shah/RoboND_Where_Am_I.git
 ```
 
 #### 2. Launch the robot inside your world
@@ -57,20 +70,10 @@ $ source devel/setup.bash
 $ roslaunch my_robot world.launch
 ```
 
-#### 3. Run ``` drive_bot ``` and ``` process_image ```
+#### 3. Launch amcl package
 This can be done by launching ```ball_chaser.launch``` file:
 ```
 $ cd <directory_where_you_have_cloned_the_repo>/RoboND_Go_Chase_It/catkin_ws/
 $ source devel/setup.bash
-$ roslaunch ball_chaser ball_chaser.launch
+$ roslaunch my_robot amcl.launch
 ```
-
-#### 4. Visualize
-To visualize the robot’s camera images, you can subscribe to camera RGB image topic from RViz. Or you can run the rqt_image_view node:
-```
-$ cd <directory_where_you_have_cloned_the_repo>/RoboND_Go_Chase_It/catkin_ws/
-$ source devel/setup.bash
-$ rosrun rqt_image_view rqt_image_view
-```
-
-Now, put the white ball at different positions in front of the robot to see how robot moves to chase the white ball!
