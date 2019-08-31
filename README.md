@@ -2,7 +2,7 @@
 
 # Udacity Nanodegree: Robotics Software Engineer
 
-## Project 02: Go Chase It!
+## Project 03: Where Am I
 
 <p align="center">
     <img src="./docs/Pics/amcl_localization.png" width="1200" height="360" title="Go Chase It!" >
