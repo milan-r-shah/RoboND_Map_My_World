@@ -2,16 +2,16 @@
 
 # Udacity Nanodegree: Robotics Software Engineer
 
-## Project 03: Where Am I
+## Project 04: Map My World
 
-<p align="center">
+<!-- <p align="center">
     <img src="./docs/Pics/amcl_localization.png" width="1200" height="360" title="Go Chase It!" >
-</p>
+</p> -->
 
 ### Directory Structure
 
 ```
-.                                           # Project 03: Where Am I
+.                                           # Project 04: Map My World
 ├── ball_chaser                             # ball_chaser package
 │   ├── launch
 │   │   └── ball_chaser.launch
@@ -58,22 +58,30 @@
 
 #### 1. First of all, clone this repo:
 ```
-git clone --recursive https://github.com/milan-r-shah/RoboND_Where_Am_I.git
+git clone --recursive https://github.com/milan-r-shah/RoboND_Map_My_World.git
 ```
 
 #### 2. Launch the robot inside your world
 This can be done by launching ```world.launch``` file:
 ```
-$ cd <directory_where_you_have_cloned_the_repo>/RoboND_Go_Chase_It/catkin_ws/
+$ cd RoboND_Map_My_World/catkin_ws/
 $ catkin_make
 $ source devel/setup.bash
 $ roslaunch my_robot world.launch
 ```
 
-#### 3. Launch amcl package
-This can be done by launching ```amcl.launch``` file:
+#### 3. Run teleop node
 ```
-$ cd <directory_where_you_have_cloned_the_repo>/RoboND_Go_Chase_It/catkin_ws/
+$ cd RoboND_Map_My_World/catkin_ws/
 $ source devel/setup.bash
-$ roslaunch my_robot amcl.launch
+$ rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+```
+
+#### 4. Launch RTAB-Map
+This can be done by launching ```mapping.launch``` file:
+```
+$ cd RoboND_Map_My_World/catkin_ws/
+$ catkin_make
+$ source devel/setup.bash
+$ roslaunch my_robot mapping.launch
 ```
