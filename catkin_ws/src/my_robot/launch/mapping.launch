@@ -54,6 +54,8 @@
 
       <!-- Set to false to avoid saving data when robot is not moving -->
       <param name="Mem/NotLinkedNodesKept" type="string" value="false"/>
+
+      <param name="Grid/FromDepth" type="string" value="false"/>
     </node>
 
     <!-- visualization with rtabmapviz -->
